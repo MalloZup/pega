@@ -47,15 +47,18 @@ def extract_failures(json_file):
     for event in salt_events:
         try:
            salt_returner = event["return"]
-           for item in salt_returner:
-                   print(list(item.values())
+           lista = list(salt_returner.values())
+           if not lista[0]['result']:
+               print(lista[0])
            print("---------------")
 
-        except Exception:
+        except IndexError:
             pass
-        except KeyError:
+        except AttributeError:
             pass
         except TypeError:
+            pass
+        except KeyError:
             pass
 def main():
     """
